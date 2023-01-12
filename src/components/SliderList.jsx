@@ -4,7 +4,7 @@ import './sliderlist.css';
 
 function SliderList() {
     const [sliders, setSliders] = useState([
-      { coefficient: -2, question: "Procédurale" },
+      { coefficient: -2, question: "Programmation Procédurale" },
       { coefficient: 5, question: "Orienté Object" },
       { coefficient: -2, question: "Fonctionnelle" },
       { coefficient: 4, question: "Web (HTML, CSS , PHP , CMS)" },
@@ -25,7 +25,7 @@ function SliderList() {
       { coefficient: 3, question: "Ensimersion" },
       { coefficient: -4, question: "Ensim'elec" },
       { coefficient: 2, question: "Palette couleur", min:0 },
-      { coefficient: 5, question: "Panne ordinnateur", min:0 },
+      { coefficient: 5, question: "Panne ordinateur", min:0 },
       { coefficient: 2, question: "Système d'exploitation", min:0 },
     ]);
   
