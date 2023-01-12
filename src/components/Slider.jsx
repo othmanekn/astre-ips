@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './slider.css';
 
 function Slider(props) {
-  const {coefficient, question, onChange} = props;
-
+  let {coefficient, question, onChange, min} = props;
+  if(min === undefined) min = -5;
   return (
     <div>
       <div className="question">{question}</div>
       <input
         type="range"
-        min={-5}
+        min={min}
         max={5}
         value={coefficient}
         onChange={onChange}

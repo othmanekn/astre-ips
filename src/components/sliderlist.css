@@ -1,5 +1,26 @@
 .sliderlist{
-    margin-top: 10em;
+    margin-top: 5em;
     margin-left: 20em;
     margin-right: 20em;
 }
+
+
+.slider-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.calculate-button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    margin-top: 5em;
+}
+
+.calculate-button:hover {
+    opacity: 0.8;
+  }
