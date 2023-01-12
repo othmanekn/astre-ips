@@ -1,5 +1,5 @@
 .sliderlist{
-    margin-top: 5em;
+    margin-top: 2em;
     margin-left: 20em;
     margin-right: 20em;
 }
@@ -18,8 +18,19 @@
     border: none;
     cursor: pointer;
     width: 50%;
-    margin-top: 5em;
+    margin-top: 2em;
+    font-size: large;
 }
+
+.download-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: blue;
+    text-decoration: underline;
+  }
 
 .calculate-button:hover {
     opacity: 0.8;

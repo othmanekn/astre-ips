@@ -9,6 +9,10 @@
     animation: slide-in 0.5s ease-out forwards;
   }
 
+.zero{
+  background: #4caf50;
+}
+
   @keyframes slide-in {
     from {
       transform: translateX(-100%);

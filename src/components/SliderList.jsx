@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import Papa from 'papaparse';
 import Slider from './Slider';
 import './sliderlist.css';
 
@@ -28,15 +29,57 @@ function SliderList() {
       { coefficient: 5, question: "Panne ordinateur", min:0 },
       { coefficient: 2, question: "Système d'exploitation", min:0 },
     ]);
-  
+
+    const [csvData, setCsvData] = useState("");
+    
+
+    
     function handleChange(index, event) {
       const newSliders = [...sliders];
       newSliders[index].coefficient = event.target.value;
       setSliders(newSliders);
     }
 
-    function handleCalculate(){
-      console.log('Calculating...')
+    async function readCsv(pathToCsv){
+      const response = await fetch('CorpusFinal.csv');
+      const reader = response.body.getReader()
+      const result = await reader.read() // raw array
+      const decoder = new TextDecoder('utf-8')
+      const csv = decoder.decode(result.value) // the csv text
+      const results = Papa.parse(csv, { header: true, dynamicTyping:true }) // object with { data, errors, meta }
+      return results.data // array of objects
+    }
+
+    async function writeToCsv(output){
+      const csv = Papa.unparse(output);
+      setCsvData(csv);
+    }
+
+    function handleDownload(){
+      setCsvData("");
+    }
+
+    async function handleCalculate(){
+      console.log('Calculating...');
+      const rows = await readCsv('CorpusFinal.csv');
+      const output = [];
+
+      for(const row of rows){
+        let total = 0;
+        let index = 0;  
+        const keys = Object.keys(row);
+          for(const key of keys.slice(1, keys.length)){
+            total += row[key] * sliders[index++].coefficient;
+          }
+          console.log(`Total: ${total} for ${row[keys[0]]}`)
+          if(total > 0)total="IPS"
+          else if (total === 0)total="Indéterminé"
+          else total="ASTRE"
+
+          output.push({identifiant: row[keys[0]], prédition: total});    
+      }
+      writeToCsv(output);
+    
    }
 
   
@@ -54,6 +97,11 @@ function SliderList() {
         ))}
       </div>
       <button onClick={handleCalculate} className="calculate-button">Calculate</button>
+      {csvData && 
+        <a className='download-link' href={`data:text/csv;charset=utf-8,${csvData}`} download="result.csv" onClick={handleDownload}>
+          Download Result
+        </a>
+      }
       </div>
     );
 }
